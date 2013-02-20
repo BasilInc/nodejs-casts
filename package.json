@@ -1,0 +1,26 @@
+{
+    "name": "Casts"
+  , "description": "A casts application."
+  , "version": "0.1.0"
+  , "private": false
+  , "engines": {
+        "node": "0.8.19"
+      , "npm": "1.1.63"
+    }
+  , "scripts": {
+      "start": "nodemon app"
+    }
+  , "dependencies": {
+      "express": "latest"
+    , "express-namespace": "latest"
+    , "jade": "latest"
+    , "mongoose": "latest"
+    , "connect-mongodb": "latest"
+    , "passport": "latest"
+    , "passport-local": "latest"
+    , "underscore": "latest"
+    , "gzippo": "latest"
+    , "async": "latest"
+    , "nodemon": "latest"
+  }
+}

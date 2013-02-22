@@ -5,6 +5,7 @@ var express = require('express')
   , fs = require('fs')
   , passport = require('passport')
 
+
 require('express-namespace')
 
 // Load configurations

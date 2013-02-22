@@ -16,7 +16,14 @@ module.exports = function (app, passport, auth) {
 
   var casts = require('../app/controllers/casts')
 
-  app.get('/', casts.index)
+  app.get('/', auth.requiresLogin, casts.index)
+  app.get('/casts', casts.index)
+  app.get('/casts/new', auth.requiresLogin, casts.new)
+  app.post('/casts', auth.requiresLogin, casts.create)
+  app.get('/casts/:id', casts.show)
+  //app.get('/casts/:id/edit', auth.requiresLogin, auth.cast.hasAuthorization, casts.edit)
+  //app.put('/casts/:id', auth.requiresLogin, auth.cast.hasAuthorization, casts.update)
+  //app.del('/casts/:id', auth.requiresLogin, auth.cast.hasAuthorization, casts.destroy)
 
   app.param('userId', function (req, res, next, id) {
     User

@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block main
+	.row
+		.span6
+			.pull-left
+				h3=title
+		.span6
+			.pull-right
+				div 
+block content
+	form.signup.form-horizontal(action="/casts", method="post")
+		.control-group
+			label.control-label(for='name') Name
+			.controls
+				input#name(type='text', name="name", placeholder='Name')
+
+		.control-group
+			label.control-label(for='email') Description
+			.controls
+				input#description(type='text', name="description", placeholder='Description')
+
+		.control-group
+			label.control-label(for='email') URL
+			.controls
+				input#url(type='text', name="url", placeholder='URL')
+
+		.form-actions
+			button.btn.btn-primary(type='submit') Create Cast

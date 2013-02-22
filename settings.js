@@ -27,8 +27,8 @@ function bootApplication(app, config, passport) {
   app.configure(function () {
     // dynamic helpers
     app.use(function (req, res, next) {
-      res.locals.appName = 'Basil'
-      res.locals.title = 'Basil'
+      res.locals.appName = 'Casts'
+      res.locals.title = 'Casts'
       res.locals.showStack = app.showStackError
       res.locals.req = req
       res.locals.formatDate = function (date) {

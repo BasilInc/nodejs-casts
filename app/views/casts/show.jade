@@ -1,0 +1,41 @@
+extends ../layouts/default
+
+block main
+	.row
+		.span6
+			.pull-left
+		.span6
+block content
+	.row
+		.span10
+			.cast-name=cast.name
+			p.cast-description=cast.description
+		.span2
+			.pull-right
+				=cast.createdAt.toDateString()
+	.row
+		.span12(style="background: #EEE; padding-top:30px; padding-bottom:30px; border-radius:10px;")
+			div(style="margin:auto; width:848px;")
+				video#video1.sublime(poster='http://media.sublimevideo.net/vpa/ms_800.jpg', width='848', height='477', data-autoresize='none', data-embed-size='940', data-uid='a55c1534', data-name='Midnight Sun', preload='none')
+					source(src='http://media.sublimevideo.net/vpa/ms_360p.mp4')
+					source(src='http://media.sublimevideo.net/vpa/ms_720p.mp4', data-quality='hd')
+					source(src='http://media.sublimevideo.net/vpa/ms_360p.webm')
+					source(src='http://media.sublimevideo.net/vpa/ms_720p.webm', data-quality='hd')
+	.row
+		.span12
+			.tabbable(style='margin-bottom: 18px; margin-top:10px')
+				ul.nav.nav-tabs
+					li.active
+						a(href='#tab1', data-toggle='tab') Section 1
+					li
+						a(href='#tab2', data-toggle='tab') Section 2
+					li
+						a(href='#tab3', data-toggle='tab') Section 3
+				.tab-content(style='padding-bottom: 9px; border-bottom: 1px solid #ddd;')
+					#tab1.tab-pane.active
+						p I'm in Section 1.
+							#tab2.tab-pane
+						p Howdy, I'm in Section 2.
+							#tab3.tab-pane
+						p What up girl, this is Section 3.
+

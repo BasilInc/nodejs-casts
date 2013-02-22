@@ -2,12 +2,15 @@ extends ../layouts/default
 
 block main
 	.row
-		.span6(style='margin-left:0px;')
+		.span6
 			.pull-left
 				h3=title
-		.span6(style='margin-left:0px;')
+		.span6
 			.pull-right
 				div 
-					= count
-					= " Uploaded"
+					if (req.isAuthenticated())
+						a.btn.btn-success(href="/casts/new") New Cast
 block content
+	.row
+		each cast in casts
+			.span4 Test

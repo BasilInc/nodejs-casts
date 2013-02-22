@@ -1,5 +1,5 @@
 body {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 .date {
@@ -42,6 +42,33 @@ body {
 
 a.tag {
   margin: 0 10px 0 0;
+}
+
+#name {
+  width:200px;
+}
+
+#description {
+  width:400px;
+}
+
+#url {
+  width:300px;
+}
+
+.sublime {
+  margin:auto !important;
+}
+
+.cast-name {
+  font-size:36px;
+  font-weight:bold;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.cast-description {
+  font-size:16px;
 }
 
 /*form.signup { display: none; }*/

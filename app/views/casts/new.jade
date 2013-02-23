@@ -9,40 +9,48 @@ block main
 			.pull-right
 				div
 block content
+	if (typeof errors !== 'undefined')
+		.fade.in.alert.alert-block.alert-error
+			ul
+			each error in errors
+				li= error.type
 	form.signup.form-horizontal(action="/casts", method="post")
 		.control-group.well
 			div
 				h4 General
 			label.control-label(for='name') Name
 			.controls
-				input#name(type='text', name="name", placeholder='Name')
+				input#name(type='text', name="name", placeholder='Name', value=cast.name)
 			label.control-label(for='email') Description
 			.controls
-				input#description(type='text', name="description", placeholder='Description')
+				input#description(type='text', name="description", placeholder='Description', value=cast.description)
+			label.control-label(for='email') Summary
+			.controls
+				textarea#summary(type='text', name="summary", placeholder='Summary')=cast.summary
+			label.control-label(for='email') Readme
+			.controls
+				textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme1
+			label.control-label(for='email') Tags
+			.controls
+				input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
 		.control-group.well
 			div
 				h4 Video
 			label.control-label(for='email') Poster
 			.controls
 				input#url(type='text', name="video[poster]", placeholder='Poster')
-			label.control-label(for='email') Auto Resize
+			label.control-label(for='email') UID
 			.controls
-				input#url(type='text', name="video[autoResize]", placeholder='Auto Resize')
-			div
-				h4 Source 1
-			label.control-label(for='src') src
+				input#url(type='text', name="video[uid]", placeholder='UID')
+			.source
+				.source-header Source
+				label.control-label(for='src') SRC
+				.controls
+					input#url(type='text', name="video[source][src]", placeholder='SRC')
+				label.control-label(for='quality') Quality
+				.controls
+					input#url(type='text', name="video[source][quality]", placeholder='Quality')
 			.controls
-				input#url(type='text', name="video[source][src]", placeholder='src')
-			label.control-label(for='quality') Quality
-			.controls
-				input#url(type='text', name="video[source][quality]", placeholder='Quality')
-			div
-				h4 Source 2
-			label.control-label(for='src') src
-			.controls
-				input#url(type='text', name="video[source][src]", placeholder='src')
-			label.control-label(for='quality') Quality
-			.controls
-				input#url(type='text', name="videos[source][quality]", placeholder='Quality')
+				.btn.btn-mini.btn-success#add_source Add Source
 		.form-actions
 			button.btn.btn-primary(type='submit') Create Cast

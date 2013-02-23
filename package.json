@@ -15,6 +15,7 @@
     , "express-namespace": "latest"
     , "jade": "latest"
     , "mongoose": "latest"
+    , "mongoose-validator": "latest"
     , "connect-mongodb": "latest"
     , "passport": "latest"
     , "passport-local": "latest"

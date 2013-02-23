@@ -71,4 +71,13 @@ a.tag {
   font-size:16px;
 }
 
+.controls {
+  margin-bottom: 5px;
+}
+
+.source-header {
+  text-align:left;
+  font-weight:bold;
+}
+
 /*form.signup { display: none; }*/

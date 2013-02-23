@@ -31,8 +31,18 @@ exports.create = function (req, res) {
 
   var cast = new Cast(req.body)
   cast.user = req.user
+  
   cast.createdAt = Date.now()
   cast.updateAt = Date.now()
+
+  if ( req.body.video.source.src.length > 0 ) {
+    for(var sourceIndex = 0; sourceIndex < req.body.video.source.src.length; sourceIndex++) {
+      cast.video.source.push({
+        src: req.body.video.source.src[sourceIndex], 
+        quality: req.body.video.source.quality[sourceIndex]
+      });
+    } 
+  }
 
   cast.save(function(err){
  
@@ -51,8 +61,8 @@ exports.create = function (req, res) {
 
 // View an cast
 exports.show = function(req, res){
-  console.log("Test");
-  console.log(Cast.findOne({id:req.params.id}));
+  //console.log("Test");
+  //console.log(Cast.findOne({id:req.params.id}));
   cast: Cast.findOne({'_id':req.params.id}).exec(function(err, cast){
     console.log(cast);
     res.render('casts/show', {

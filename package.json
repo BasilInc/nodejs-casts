@@ -23,5 +23,6 @@
     , "async": "latest"
     , "nodemon": "latest"
     , "markdown": "*"
+    , "highlight": "*"
   }
 }

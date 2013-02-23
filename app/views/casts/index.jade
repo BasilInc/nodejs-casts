@@ -13,4 +13,5 @@ block main
 block content
 	.row
 		each cast in casts
-			.span4 Test
+			.span4
+				a(href="/casts/"+cast.id)= cast.name

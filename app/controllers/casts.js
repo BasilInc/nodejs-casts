@@ -1,5 +1,7 @@
 var mongoose = require('mongoose')
   , Cast = mongoose.model('Cast')
+  , markdown = require('markdown').markdown
+  , highlighter = require("highlight").Highlight
 
 
 // auth callback
@@ -28,7 +30,6 @@ exports.new = function(req, res){
 
 // Create a cast
 exports.create = function (req, res) {
-
   var cast = new Cast(req.body)
   cast.user = req.user
   cast.createdAt = Date.now()
@@ -51,12 +52,25 @@ exports.create = function (req, res) {
 
 // View an cast
 exports.show = function(req, res){
+  var mard =  
+"# Casts Summary\n\
+\n\
+    var x = 12;\n\
+    var y = x;\n\
+    function w() {\n\
+      console.log(y);\n\
+    }\n\
+";
+
+  var body = markdown.toHTML(mard,"Maruku");
+  var finalBody = highlighter(body,false,true);
   console.log("Test");
   console.log(Cast.findOne({id:req.params.id}));
   cast: Cast.findOne({'_id':req.params.id}).exec(function(err, cast){
     console.log(cast);
     res.render('casts/show', {
-      cast: cast
+      cast: cast,
+      body : finalBody
     })
   });
 }

@@ -7,23 +7,50 @@ block main
 				h3=title
 		.span6
 			.pull-right
-				div 
+				div
 block content
+	if (typeof errors !== 'undefined')
+		.fade.in.alert.alert-block.alert-error
+			ul
+			each error in errors
+				li= error.type
 	form.signup.form-horizontal(action="/casts", method="post")
-		.control-group
+		.control-group.well
+			div
+				h4 General
 			label.control-label(for='name') Name
 			.controls
-				input#name(type='text', name="name", placeholder='Name')
-
-		.control-group
+				input#name(type='text', name="name", placeholder='Name', value=cast.name)
 			label.control-label(for='email') Description
 			.controls
-				input#description(type='text', name="description", placeholder='Description')
-
-		.control-group
-			label.control-label(for='email') URL
+				input#description(type='text', name="description", placeholder='Description', value=cast.description)
+			label.control-label(for='email') Summary
 			.controls
-				input#url(type='text', name="url", placeholder='URL')
-
+				textarea#summary(type='text', name="summary", placeholder='Summary')=cast.summary
+			label.control-label(for='email') Readme
+			.controls
+				textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme1
+			label.control-label(for='email') Tags
+			.controls
+				input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
+		.control-group.well
+			div
+				h4 Video
+			label.control-label(for='email') Poster
+			.controls
+				input#url(type='text', name="video[poster]", placeholder='Poster')
+			label.control-label(for='email') UID
+			.controls
+				input#url(type='text', name="video[uid]", placeholder='UID')
+			.source
+				.source-header Source
+				label.control-label(for='src') SRC
+				.controls
+					input#url(type='text', name="video[source][src]", placeholder='SRC')
+				label.control-label(for='quality') Quality
+				.controls
+					input#url(type='text', name="video[source][quality]", placeholder='Quality')
+			.controls
+				.btn.btn-mini.btn-success#add_source Add Source
 		.form-actions
 			button.btn.btn-primary(type='submit') Create Cast

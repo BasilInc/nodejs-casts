@@ -29,7 +29,7 @@ block content
 				textarea#summary(type='text', name="summary", placeholder='Summary')=cast.summary
 			label.control-label(for='email') Readme
 			.controls
-				textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme1
+				textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme
 			label.control-label(for='email') Tags
 			.controls
 				input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
@@ -46,10 +46,10 @@ block content
 				.source-header Source
 				label.control-label(for='src') SRC
 				.controls
-					input#url(type='text', name="video[source][src]", placeholder='SRC')
+					input#url(type='text', name="video[source][src][]", placeholder='SRC')
 				label.control-label(for='quality') Quality
 				.controls
-					input#url(type='text', name="video[source][quality]", placeholder='Quality')
+					input#url(type='text', name="video[source][quality][]", placeholder='Quality')
 			.controls
 				.btn.btn-mini.btn-success#add_source Add Source
 		.form-actions

@@ -38,5 +38,5 @@ This is an application written in Node.js that allows admins to post, share, and
 	- Create functionality to handle markdown parsing
 	- Discus Integration
 	- Angular.js
-
-
+- Everyone
+	- Write Tests

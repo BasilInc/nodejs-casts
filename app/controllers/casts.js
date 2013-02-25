@@ -1,5 +1,10 @@
 var mongoose = require('mongoose')
   , Cast = mongoose.model('Cast')
+  , markdown = require('markdown').markdown
+  , rs = require('robotskirt')
+  // , renderer = new rs.HtmlRenderer()
+  , parser = rs.Markdown.std()
+  , highlighter = require("highlight").Highlight
 
 
 // auth callback
@@ -28,10 +33,9 @@ exports.new = function(req, res){
 
 // Create a cast
 exports.create = function (req, res) {
-
   var cast = new Cast(req.body)
   cast.user = req.user
-  
+  console.log(cast)
   cast.createdAt = Date.now()
   cast.updateAt = Date.now()
 
@@ -61,12 +65,44 @@ exports.create = function (req, res) {
 
 // View an cast
 exports.show = function(req, res){
-  //console.log("Test");
-  //console.log(Cast.findOne({id:req.params.id}));
+  var test_skirt = "*Lorem ipsum dolor sit amet*, consectetur adipiscing elit. Sed bibendum orci quis erat elementum luctus. Ut a ante a tortor luctus semper id eget justo. \n\
+\n\
+Morbi non arcu a elit adipiscing ultricies. In at condimentum tellus. Nullam ac ultricies quam. \n\
+\n\
+> This is a blockquote.\n\n\
+> It has several lines.\n\n\
+>\n\
+> Line three\n\n\
+> Haikus are nice, but\n\n\
+> Sometimes, they don't make any sense\n\n\
+> Refridgerator\n\n\
+>\n\
+> * List Item 1\n\
+> * List Item 2\n\
+>\n\
+> 1. OL 1\n\
+> 1. OL 2\n\
+\n\
+";
+  console.log("Test");
+  console.log(Cast.findOne({id:req.params.id}));
   cast: Cast.findOne({'_id':req.params.id}).exec(function(err, cast){
     console.log(cast);
+    var summary = '';
+    if (cast.summary) {
+      summary = highlighter(markdown.toHTML(cast.summary),false,true)
+    }
+    var readme = '';
+    if(cast.readme) {
+      readme = highlighter(markdown.toHTML(cast.readme),false,true)
+    }
     res.render('casts/show', {
-      cast: cast
+      cast: cast,
+      test_skirt: parser.render(test_skirt),
+      summary : summary,
+      ascii_cast : readme
     })
   });
 }
+
+

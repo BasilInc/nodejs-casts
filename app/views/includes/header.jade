@@ -1,12 +1,5 @@
 .navbar.navbar-fixed-top(role='navigation')
   .navbar-inner
     .container
-      a.brand(href='/') CastsApp
-      if (req.isAuthenticated())
-        .pull-right(style="margin-top:5px;")
-          a(href="/users/"+req.user.id, title="Profile", style="margin-right:5px;") Profile
-          |
-          a(href="/logout", title="logout", style="margin-left:5px;") Logout
-      else
-        .pull-right
-          a.btn.btn-mini(href="/login", title="Login") Login
+      a.brand(href='/') Champions
+      

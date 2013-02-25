@@ -24,6 +24,7 @@
     , "async": "latest"
     , "nodemon": "latest"
     , "markdown": "*"
+    , "robotskirt": "*"
     , "highlight": "*"
   }
 }

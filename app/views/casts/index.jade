@@ -11,7 +11,17 @@ block main
 					if (req.isAuthenticated())
 						a.btn.btn-success(href="/casts/new") New Cast
 block content
-	.row
-		each cast in casts
-			.span4
-				a(href="/casts/"+cast.id)= cast.name
+	each cast in casts
+		.row(style="border-bottom: 1px solid rgba(0,0,0,0.3); padding:10px;")
+			.span3
+				a.thumbnail(href="/casts/"+cast.id)
+					img(src= cast.video.poster)
+			.span8
+				h3= cast.name
+				div
+					= cast.summary
+				div
+					a.btn.btn-small.btn-primary(href="/casts/"+cast.id) Play Episode
+
+				
+					

@@ -21,6 +21,9 @@ block content
 						source(src=s.src, data-quality=s.quality)
 	.row
 		.span12
+			!{test_skirt}
+	.row
+		.span12
 			.tabbable(style='margin-bottom: 18px; margin-top:10px')
 				ul.nav.nav-tabs
 					li.active
@@ -31,9 +34,9 @@ block content
 						a(href='#tab3', data-toggle='tab') Comments
 				.tab-content(style='padding-bottom: 9px; border-bottom: 1px solid #ddd;')
 					#tab1.tab-pane.active
-						!{body}
+						!{summary}
 					#tab2.tab-pane
-						p Howdy, I'm in Section 2.
+						!{ascii_cast}
 					#tab3.tab-pane
 						| <div id="disqus_thread"></div>
 						|   <script type="text/javascript">

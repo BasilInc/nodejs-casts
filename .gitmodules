@@ -1,3 +1,6 @@
 [submodule "public/vendor/bootstrap"]
 	path = public/vendor/bootstrap
 	url = https://github.com/twitter/bootstrap.git
+[submodule "public/vendor/angular"]
+	path = public/vendor/angular
+	url = https://github.com/angular/angular.js.git

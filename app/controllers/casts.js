@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-  , Cast = mongoose.model('Cast')
+  , Cast = require('../models/cast')
   , markdown = require('markdown').markdown
   , rs = require('robotskirt')
   // , renderer = new rs.HtmlRenderer()
@@ -9,11 +9,11 @@ var mongoose = require('mongoose')
 
 // auth callback
 exports.index = function (req, res, next) {
-  Cast
+  Cast.model
   .find({user:req.user})
   .exec(function(err, casts) {
       if (err) return res.render('500')
-      Cast.count().exec(function (err, count) {
+      Cast.model.count().exec(function (err, count) {
         res.render('casts/index', {
             title: 'Casts',
             count: count,
@@ -27,13 +27,13 @@ exports.index = function (req, res, next) {
 exports.new = function(req, res){
   res.render('casts/new', {
       title: 'New Cast'
-    , cast: new Cast({})
+    , cast: Cast.new({})
   })
 }
 
 // Create a cast
 exports.create = function (req, res) {
-  var cast = new Cast(req.body)
+  var cast = Cast.new(req.body)
   cast.user = req.user
   console.log(cast)
   cast.createdAt = Date.now()
@@ -85,8 +85,8 @@ Morbi non arcu a elit adipiscing ultricies. In at condimentum tellus. Nullam ac 
 \n\
 ";
   console.log("Test");
-  console.log(Cast.findOne({id:req.params.id}));
-  cast: Cast.findOne({'_id':req.params.id}).exec(function(err, cast){
+  console.log(Cast.model.findOne({id:req.params.id}));
+  cast: Cast.model.findOne({'_id':req.params.id}).exec(function(err, cast){
     console.log(cast);
     var summary = '';
     if (cast.summary) {

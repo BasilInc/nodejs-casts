@@ -1,7 +1,7 @@
 
 module.exports = {
     development: {
-      db: 'mongodb://localhost/casts',
+      db: 'mongodb://localhost/casts_dev',
       /*
       facebook: {
           clientID: "APP_ID"
@@ -26,7 +26,7 @@ module.exports = {
       */
     }
   , test: {
-
+      db: 'mongodb://localhost/casts_test',
     }
   , production: {
 

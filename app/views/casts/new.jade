@@ -2,27 +2,7 @@ extends ../layouts/default
 
 block main
 	div
-		#ang_hello
-			label Name:
-			input(type="text", ng-model="yourName", placeholder="Enter a name here")
-			hr
-			h1 {{yourName}}
 		
-		#ang_tasks
-			h2 Todo
-			div(ng-controller='TodoCtrl')
-				span {{remaining()}} of {{todos.length}} remaining [ 
-					a(href="", ng-click="archive()") archive
-					]
-				ul
-					li(ng-repeat="todo in todos")
-						input(type="checkbox", ng-model="todo.done")
-						span(class="dont-{{todo.done}}") {{todo.text}}
-
-				form(ng-submit="addTodo()")
-					input(type="text", ng-model="todoText", size="30", placeholder="Add a new Todo")
-					input.btn-primary.btn(type="submit", value="add")
-
 	.row
 		.span6
 			.pull-left
@@ -37,9 +17,6 @@ block content
 			each error in errors
 				li= error.type
 	div(ng-controller="VideoCtrl")
-		form(ng-submit="parseVideo()")
-			input(type="text", ng-model="videoHTML", size="30", placeholder="Add a Video")
-			input.btn-primary.btn(type="submit", value="Set")
 		form.signup.form-horizontal(action="/casts", method="post")
 			.control-group.well
 				div
@@ -60,25 +37,26 @@ block content
 				.controls
 					input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
 			.control-group.well
-				
+					h4 Video HTML
+					textarea(ng-model="videoHTML", size="30", placeholder="Add a Video", ng-change="parseVideo()", class="span6")
 					div
 						{{videoHTML}}	
 					div
 						h4 Video
 					label.control-label(for='email') Poster
 					.controls
-						input#url(type='text', name="video[poster]", placeholder='Poster', value="{{grabPoster()}}")
+						input#url(type='text', name="video[poster]", placeholder='Poster', value="{{video.poster}}")
 					label.control-label(for='email') UID
 					.controls
-						input#url(type='text', name="video[uid]", placeholder='UID')
-					.source
+						input#url(type='text', name="video[uid]", placeholder='UID',value="{{video.uid}}")
+					.source(ng-repeat="source in video.sources") 
 						.source-header Source
 						label.control-label(for='src') SRC
 						.controls
-							input#url(type='text', name="video[source][src][]", placeholder='SRC')
+							input#url(type='text', name="video[source][src][]", placeholder='SRC', value="{{source.src}}")
 						label.control-label(for='quality') Quality
 						.controls
-							input#url(type='text', name="video[source][quality][]", placeholder='Quality')
+							input#url(type='text', name="video[source][quality][]", placeholder='Quality', value="{{source.quality}}")
 				.controls
 					.btn.btn-mini.btn-success#add_source Add Source
 			.form-actions

@@ -42,41 +42,44 @@ var Cast = function(){
 
   var _model = mongoose.model('Cast',castSchema)
 
+  var _callbackHandler = function(callback, err, docs) {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      callback(docs);
+    }
+  }
+
   var _new = function(doc) {
     return new _model(doc);
   };
 
   var _create = function(doc,cb) {
     var newCast = new _model(doc);
-    newCast.save(function(err,cast) {
-      if(err) {
-        console.log(err);
-      }
-      else {
-        cb(cast);
-      }
-      
-    })
+    newCast.save(_callbackHandler.bind(null,cb));
   };
 
   var _findByName = function(name,success) {
-    _model.findOne({name:name},function(err,cast){
-      if(err) {
-        console.log(err)
-      } 
-      else {
-        success(cast);
-      }
-    });
+    _model.findOne({name:name},_callbackHandler.bind(null,success));
   };
 
+  var _findByUser = function(user,success) {
+    _model.find({user:user},_callbackHandler.bind(null,success));
+  };
+
+  var _findById = function(id,success) {
+    _model.findById(id,_callbackHandler.bind(null,success));
+  };
   // Public Interface
   return {
     schema  : castSchema,
     model   : _model,
     create  : _create,
     new     : _new,
-    findByName : _findByName
+    findByName : _findByName,
+    findById : _findById,
+    findByUser : _findByUser
   }
 
 }();

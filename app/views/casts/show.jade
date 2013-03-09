@@ -16,7 +16,7 @@ block content
 	.row
 		.span12(style="background: #EEE; padding-top:30px; padding-bottom:30px; border-radius:10px;")
 			div(style="margin:auto; width:848px;")
-				video#video1.sublime(poster=cast.video.poster, width='848', height='477', data-autoresize='none', data-embed-size='940', data-uid='a55c1534', data-name='Midnight Sun', preload='none')
+				video#video1.sublime(poster=cast.video.poster, width='848', height='477', data-autoresize='none', data-embed-size='940', data-uid=cast.video.uid, data-name='Midnight Sun', preload='none')
 					each s in cast.video.source
 						source(src=s.src, data-quality=s.quality)
 	.row

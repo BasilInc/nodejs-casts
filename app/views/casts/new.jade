@@ -1,6 +1,28 @@
 extends ../layouts/default
 
 block main
+	div
+		#ang_hello
+			label Name:
+			input(type="text", ng-model="yourName", placeholder="Enter a name here")
+			hr
+			h1 {{yourName}}
+		
+		#ang_tasks
+			h2 Todo
+			div(ng-controller='TodoCtrl')
+				span {{remaining()}} of {{todos.length}} remaining [ 
+					a(href="", ng-click="archive()") archive
+					]
+				ul
+					li(ng-repeat="todo in todos")
+						input(type="checkbox", ng-model="todo.done")
+						span(class="dont-{{todo.done}}") {{todo.text}}
+
+				form(ng-submit="addTodo()")
+					input(type="text", ng-model="todoText", size="30", placeholder="Add a new Todo")
+					input.btn-primary.btn(type="submit", value="add")
+
 	.row
 		.span6
 			.pull-left
@@ -14,43 +36,50 @@ block content
 			ul
 			each error in errors
 				li= error.type
-	form.signup.form-horizontal(action="/casts", method="post")
-		.control-group.well
-			div
-				h4 General
-			label.control-label(for='name') Name
-			.controls
-				input#name(type='text', name="name", placeholder='Name', value=cast.name)
-			label.control-label(for='email') Description
-			.controls
-				input#description(type='text', name="description", placeholder='Description', value=cast.description)
-			label.control-label(for='email') Summary
-			.controls
-				textarea#summary(type='text', name="summary", placeholder='Summary')=cast.summary
-			label.control-label(for='email') Readme
-			.controls
-				textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme
-			label.control-label(for='email') Tags
-			.controls
-				input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
-		.control-group.well
-			div
-				h4 Video
-			label.control-label(for='email') Poster
-			.controls
-				input#url(type='text', name="video[poster]", placeholder='Poster')
-			label.control-label(for='email') UID
-			.controls
-				input#url(type='text', name="video[uid]", placeholder='UID')
-			.source
-				.source-header Source
-				label.control-label(for='src') SRC
+	div(ng-controller="VideoCtrl")
+		form(ng-submit="parseVideo()")
+			input(type="text", ng-model="videoHTML", size="30", placeholder="Add a Video")
+			input.btn-primary.btn(type="submit", value="Set")
+		form.signup.form-horizontal(action="/casts", method="post")
+			.control-group.well
+				div
+					h4 General
+				label.control-label(for='name') Name
 				.controls
-					input#url(type='text', name="video[source][src][]", placeholder='SRC')
-				label.control-label(for='quality') Quality
+					input#name(type='text', name="name", placeholder='Name', value=cast.name)
+				label.control-label(for='email') Description
 				.controls
-					input#url(type='text', name="video[source][quality][]", placeholder='Quality')
-			.controls
-				.btn.btn-mini.btn-success#add_source Add Source
-		.form-actions
-			button.btn.btn-primary(type='submit') Create Cast
+					input#description(type='text', name="description", placeholder='Description', value=cast.description)
+				label.control-label(for='email') Summary
+				.controls
+					textarea#summary(type='text', name="summary", placeholder='Summary')=cast.summary
+				label.control-label(for='email') Readme
+				.controls
+					textarea#readme(type='text', name="readme", placeholder='Readme')=cast.readme
+				label.control-label(for='email') Tags
+				.controls
+					input#tags(type='text', name="readme", placeholder='Readme', value=cast.tags)
+			.control-group.well
+				
+					div
+						{{videoHTML}}	
+					div
+						h4 Video
+					label.control-label(for='email') Poster
+					.controls
+						input#url(type='text', name="video[poster]", placeholder='Poster', value="{{grabPoster()}}")
+					label.control-label(for='email') UID
+					.controls
+						input#url(type='text', name="video[uid]", placeholder='UID')
+					.source
+						.source-header Source
+						label.control-label(for='src') SRC
+						.controls
+							input#url(type='text', name="video[source][src][]", placeholder='SRC')
+						label.control-label(for='quality') Quality
+						.controls
+							input#url(type='text', name="video[source][quality][]", placeholder='Quality')
+				.controls
+					.btn.btn-mini.btn-success#add_source Add Source
+			.form-actions
+				button.btn.btn-primary(type='submit') Create Cast

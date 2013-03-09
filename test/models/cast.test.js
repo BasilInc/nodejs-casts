@@ -1,11 +1,14 @@
 var should    = require("should"),
     mongoose  = require("mongoose"),
-    config    = require("../../config/config").test
-    Cast      = require("../../app/models/cast");
+    config    = require("../../config/config").test,
+    Cast      = require("../../app/models/cast"),
+    User1      = require("../../app/models/user"),
+    User = mongoose.model('User');
 
 mongoose.connect(config.db);
 
 describe('Cast', function(){
+  var castId = '';
   beforeEach(function(done){
     var newCast = Cast.create({
       name: 'TestCast1', 
@@ -17,6 +20,7 @@ describe('Cast', function(){
         {src:'123'}
         ]
       }}, function(cast){
+        castId = cast.id;
         done();
     });
     
@@ -68,4 +72,34 @@ describe('Cast', function(){
       done();
     })
   })
+
+  it("finds a cast by id", function(done) {
+    Cast.findById(castId, function(cast){
+      cast.name.should.equal('TestCast1');
+      cast.id.should.equal(castId);
+      done();
+    })
+  })
+
+  it("finds casts by user", function(done) {
+    var user = new User({name:'jason',password:'12345678'})
+    user.save(function(err){
+      Cast.create({
+        name: 'TestCast2', 
+        description: 'Test Description', 
+        user: user,
+        video: {
+          poster: '123', 
+          uuid:'123', 
+          source: [
+          {src:'123'}
+          ]
+      }}, function(){
+        Cast.findByUser(user, function(cast){
+          cast[0].name.should.equal('TestCast2');
+          done();
+        })
+      });
+    })
+  });
 });

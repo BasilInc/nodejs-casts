@@ -9,18 +9,15 @@ var mongoose = require('mongoose')
 
 // auth callback
 exports.index = function (req, res, next) {
-  Cast.model
-  .find({user:req.user})
-  .exec(function(err, casts) {
-      if (err) return res.render('500')
-      Cast.model.count().exec(function (err, count) {
-        res.render('casts/index', {
-            title: 'Casts',
-            count: count,
-            casts: casts
-        })
+  Cast.findByUser(req.user, function(casts) {
+    Cast.model.count().exec(function (err, count) {
+      res.render('casts/index', {
+          title: 'Casts',
+          count: count,
+          casts: casts
       })
     });
+  });
 }
 
 // New cast
@@ -84,9 +81,10 @@ Morbi non arcu a elit adipiscing ultricies. In at condimentum tellus. Nullam ac 
 > 1. OL 2\n\
 \n\
 ";
-  console.log("Test");
-  console.log(Cast.model.findOne({id:req.params.id}));
-  cast: Cast.model.findOne({'_id':req.params.id}).exec(function(err, cast){
+  // console.log("Test");
+  // console.log(Cast.model.findOne({id:req.params.id}));
+
+  Cast.findById(req.params.id, function(cast) {
     console.log(cast);
     var summary = '';
     if (cast.summary) {
@@ -102,7 +100,7 @@ Morbi non arcu a elit adipiscing ultricies. In at condimentum tellus. Nullam ac 
       summary : summary,
       ascii_cast : readme
     })
-  });
+  })
 }
 
 

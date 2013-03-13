@@ -40,15 +40,10 @@ var Cast = function(){
     }
   });
 
-  var _model = mongoose.model('Cast',castSchema)
+  var _model = mongoose.model('Cast',castSchema);
 
   var _callbackHandler = function(callback, err, docs) {
-    if(err) {
-      console.log(err);
-    }
-    else {
-      callback(docs);
-    }
+    callback(err,docs);
   }
 
   var _new = function(doc) {
@@ -71,15 +66,16 @@ var Cast = function(){
   var _findById = function(id,success) {
     _model.findById(id,_callbackHandler.bind(null,success));
   };
+  
   // Public Interface
   return {
-    schema  : castSchema,
-    model   : _model,
-    create  : _create,
-    new     : _new,
-    findByName : _findByName,
-    findById : _findById,
-    findByUser : _findByUser
+    schema      : castSchema,
+    model       : _model,
+    create      : _create,
+    new         : _new,
+    findByName  : _findByName,
+    findById    : _findById,
+    findByUser  : _findByUser
   }
 
 }();

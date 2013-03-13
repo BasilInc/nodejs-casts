@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose')
   , LocalStrategy = require('passport-local').Strategy
-  , User = mongoose.model('User')
+  , User = require('../app/models/user')
 
 
 exports.boot = function (passport, config) {
@@ -13,7 +13,7 @@ exports.boot = function (passport, config) {
   })
 
   passport.deserializeUser(function(id, done) {
-    User.findOne({ _id: id }, function (err, user) {
+    User.findById(id, function (err, user) {
       done(err, user)
     })
   })
@@ -24,7 +24,7 @@ exports.boot = function (passport, config) {
       passwordField: 'password'
     },
     function(email, password, done) {
-      User.findOne({ email: email }, function (err, user) {
+      User.findByEmail(email , function (err, user) {
         if (err) { return done(err) }
         if (!user) {
           return done(null, false, { message: 'Unknown user' })

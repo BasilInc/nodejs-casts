@@ -1,7 +1,9 @@
-var should    = require("should"),
+var chai      = require("chai"),
     mongoose  = require("mongoose"),
     config    = require("../../config/config").test,
     User      = require("../../app/models/user")
+
+chai.should();
 
 // mongoose.connect(config.db);
 

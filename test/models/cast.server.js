@@ -1,9 +1,10 @@
-var should    = require("should"),
+var chai      = require("chai"),
     mongoose  = require("mongoose"),
     config    = require("../../config/config").test,
     Cast      = require("../../app/models/cast"),
-    User1      = require("../../app/models/user"),
-    User = mongoose.model('User');
+    User     = require("../../app/models/user");;
+
+chai.should();
 
 describe('Cast', function(){
   var castId = '';
@@ -92,7 +93,7 @@ describe('Cast', function(){
   })
 
   it("finds casts by user", function(done) {
-    var user = new User({name:'jason',password:'12345678'})
+    var user = User.new({name:'jason',password:'12345678'});
     user.save(function(err){
       Cast.create({
         name: 'TestCast2', 

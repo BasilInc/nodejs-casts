@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="Chrome 26.0 (Mac)" package="" timestamp="2013-03-12T15:56:06" id="0" hostname="Longclaw" tests="2" errors="0" failures="0" time="0.005">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.28 Safari/537.31"/>
+    </properties>
+    <testcase name="should fail" time="0" classname="Chrome 26.0 (Mac).FAILURE"/>
+    <testcase name="should parse video html" time="0.005" classname="Chrome 26.0 (Mac).VideoCtrl"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 
 // auth callback
 exports.index = function (req, res, next) {
-  Cast.findByUser(req.user, function(casts) {
+  Cast.findByUser(req.user, function(err,casts) {
     Cast.model.count().exec(function (err, count) {
       res.render('casts/index', {
           title: 'Casts',
@@ -84,7 +84,7 @@ Morbi non arcu a elit adipiscing ultricies. In at condimentum tellus. Nullam ac 
   // console.log("Test");
   // console.log(Cast.model.findOne({id:req.params.id}));
 
-  Cast.findById(req.params.id, function(cast) {
+  Cast.findById(req.params.id, function(err,cast) {
     console.log(cast);
     var summary = '';
     if (cast.summary) {

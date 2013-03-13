@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-  , User = mongoose.model('User')
+  , User = require('../models/user')
 
 exports.signin = function (req, res) {}
 
@@ -35,7 +35,7 @@ exports.session = function (req, res) {
 
 // signup
 exports.create = function (req, res) {
-  var user = new User(req.body)
+  var user = User.new(req.body)
   user.provider = 'local'
   user.save(function (err) {
     if (err) return res.render('users/signup', { errors: err.errors })

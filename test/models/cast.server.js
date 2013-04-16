@@ -1,14 +1,27 @@
-var should    = require("should"),
+var chai      = require("chai"),
     mongoose  = require("mongoose"),
     config    = require("../../config/config").test,
     Cast      = require("../../app/models/cast"),
-    User1      = require("../../app/models/user"),
-    User = mongoose.model('User');
+    User     = require("../../app/models/user");;
 
-mongoose.connect(config.db);
+chai.should();
 
 describe('Cast', function(){
   var castId = '';
+
+  // Before All Tests
+  before(function(done){
+    mongoose.connect(config.db);
+    done();
+  });
+  
+  // After all Tests
+  after(function(done){
+    mongoose.connection.close();
+    done();
+  });
+
+  // Before Each Test
   beforeEach(function(done){
     var newCast = Cast.create({
       name: 'TestCast1', 
@@ -19,21 +32,20 @@ describe('Cast', function(){
         source: [
         {src:'123'}
         ]
-      }}, function(cast){
+      }}, function(err,cast){
         castId = cast.id;
         done();
     });
     
   });
-
+  // After Each Test
   afterEach(function(done){
     Cast.model.remove({}, function() {
       done();
     });
   });
 
-
-  it("saves a new cast", function(done){
+  it("creates a new cast", function(done){
     var newCast = Cast.new({
       name: 'TestCast2', 
       description: 'Test Description', 
@@ -44,7 +56,6 @@ describe('Cast', function(){
         {src:'123'}
         ]
       }});
-
     newCast.name.should.equal('TestCast2');
     done();
 
@@ -60,21 +71,21 @@ describe('Cast', function(){
         source: [
         {src:'123'}
         ]
-      }}, function(cast){
+      }}, function(err,cast){
       cast.name.should.equal('TestCast2');
       done();
     });
   });
 
   it("finds a cast by name", function(done) {
-    Cast.findByName('TestCast1', function(cast){
+    Cast.findByName('TestCast1', function(err,cast){
       cast.name.should.equal('TestCast1');
       done();
     })
   })
 
   it("finds a cast by id", function(done) {
-    Cast.findById(castId, function(cast){
+    Cast.findById(castId, function(err,cast){
       cast.name.should.equal('TestCast1');
       cast.id.should.equal(castId);
       done();
@@ -82,7 +93,7 @@ describe('Cast', function(){
   })
 
   it("finds casts by user", function(done) {
-    var user = new User({name:'jason',password:'12345678'})
+    var user = User.new({name:'jason',password:'12345678'});
     user.save(function(err){
       Cast.create({
         name: 'TestCast2', 
@@ -95,7 +106,7 @@ describe('Cast', function(){
           {src:'123'}
           ]
       }}, function(){
-        Cast.findByUser(user, function(cast){
+        Cast.findByUser(user, function(err,cast){
           cast[0].name.should.equal('TestCast2');
           done();
         })

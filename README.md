@@ -31,12 +31,24 @@ This is an application written in Node.js that allows admins to post, share, and
 	- github: Hash
 
 # Tasks
-- Erich
-	- Add screencast model
-	- Create main video page (Jason to provide feedback/input)
-- Jason
-	- Create functionality to handle markdown parsing
-	- Discus Integration
-	- Angular.js
-- Everyone
-	- Write Tests
+## Erich
+- [] Prettify front page
+	- Better Styling
+	- Thumbnails
+	- Use Papercut
+
+## Jason
+- [] Configure Disqus 
+- [] Refactor User model
+	- Ensure tests are written
+- [] Spruce up new page
+
+## General
+- [] Deploy to Heroku
+- [] More Tests
+	- Ensure Models are tested
+	- Ensure Controllers are tested
+	- Ensure utility function are tested
+- [] Separate general users from admins
+	- Admins are the only ones that can upload/edit videos
+- [] Setup analytics
